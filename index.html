@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8" />
 		<title>Cherry's 2048</title>
@@ -7,13 +8,38 @@
 		<link rel="shortcut icon" href="img/cherry.ico" />
 		<link rel="stylesheet" href="css/main.css" />
 	</head>
-	
+
 	<body>
-		 <!--The header info-->
-		 <header>
-		 	<h1>2048</h1>
-		 	<button class="new_game">New Game</button>
-		 	<div class="author"> Create by <a href="#">Cherry Liang</a></div>
-		 </header>
+		<!--The header info-->
+		<header>
+			<h1>2048</h1>
+			<a href="#" id="new_game">New Game</a>
+			<span id="score">score: <span id="score_num">0</span></span>
+			<!-- <div id="author"> Author: <a href="#">Cherry Liang</a></div> -->
+		</header>
+
+		<!-- 4*4 grids -->
+		<div id="grid-container">
+			<div class="grid-cell" id="grid-cell-0-0"></div>
+			<div class="grid-cell" id="grid-cell-0-1"></div>
+			<div class="grid-cell" id="grid-cell-0-2"></div>
+			<div class="grid-cell" id="grid-cell-0-3"></div>
+
+			<div class="grid-cell" id="grid-cell-1-0"></div>
+			<div class="grid-cell" id="grid-cell-1-1"></div>
+			<div class="grid-cell" id="grid-cell-1-2"></div>
+			<div class="grid-cell" id="grid-cell-1-3"></div>
+
+			<div class="grid-cell" id="grid-cell-2-0"></div>
+			<div class="grid-cell" id="grid-cell-2-1"></div>
+			<div class="grid-cell" id="grid-cell-2-2"></div>
+			<div class="grid-cell" id="grid-cell-2-3"></div>
+
+			<div class="grid-cell" id="grid-cell-3-0"></div>
+			<div class="grid-cell" id="grid-cell-3-1"></div>
+			<div class="grid-cell" id="grid-cell-3-2"></div>
+			<div class="grid-cell" id="grid-cell-3-3"></div>
+		</div>
 	</body>
+
 </html>
