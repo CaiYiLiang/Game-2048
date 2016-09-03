@@ -44,11 +44,21 @@ header #author a{
 
 
 #grid-container{
-	width: 450px;
-	height: 450px;
+	width: 500px;
+	height: 500px;
 	margin: 10px auto;
     background-color:#bbada0;
 
     border-radius: 10px;
     position: relative;
 }
+
+#grid-container .grid-cell{
+	width: 100px;
+	height: 100px;
+	background-color: #ccc0b3;
+	border-radius: 6px;
+	
+	 position: absolute;
+}
+
