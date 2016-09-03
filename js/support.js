@@ -108,6 +108,17 @@ function showRandomNum(x, y, num) {
 		}, 80);
 }
 
+
+function moveAnimate(x,y,k){
+	  var oldNumberCell = $("#number-cell-"+x+"-"+y);
+	  oldNumberCell.animate({
+	  	top:getTop(x),
+	  	left:getLeft(k)
+	  },200)
+	  
+}
+
+
 //indeed, even only one grid which is movable can return true
 function canMoveLeft(board){
 	for(var x=0;x<4;x++){
@@ -120,12 +131,54 @@ function canMoveLeft(board){
 	return false;
 }
 
-function moveLeft(){
-	//To confirm whether the gird can be moved towards left
-	if(!canMoveLeft())	
-	   return false;
-	//To move left 
-	
+function noHorizontalBlock(x,y,k,board){
+	for(var z=k+1;z<y;z++){
+		if(board[x][k]!=0)
+			return false;
+	}
+	return true;
 }
 
 
+function moveLeft(){
+	//To confirm whether the gird can be moved towards left
+	if(!canMoveLeft(board))	
+	   return false;
+	//To move left 
+	
+	for(var x =0; x<4;x++){
+		for(var y =1 ; y<4 ;y++){
+			if(board[x][y]!=0){
+				
+				for(var k =0;k<y;k++){
+					if( board[x][k]==0 && noHorizontalBlock(x,y,k,board) ){
+						//move
+						moveAnimate(x,y,k);
+						board[x][k]=board[x][y];
+						board[x][y]=0;
+						continue;
+					}
+					
+					if( board[x][k]==board[x][y] && noHorizontalBlock(x,y,k,board) ){
+						//move
+						moveAnimate(x,y,k);
+						board[x][y]=0;
+                        
+						//add
+						board[x][k]*=2;
+						continue;	
+					}
+				}
+			}
+		}
+	}
+	
+	 setTimeout("updateBoardView();",200);
+	 return true;
+}
+
+
+
+function gameStatus(){
+	
+}
