@@ -109,7 +109,7 @@ function showRandomNum(x, y, num) {
 }
 
 
-function moveAnimate(x,y,k){
+function moveHorizontalAnimate(x,y,k){
 	  var oldNumberCell = $("#number-cell-"+x+"-"+y);
 	  oldNumberCell.animate({
 	  	top:getTop(x),
@@ -118,13 +118,24 @@ function moveAnimate(x,y,k){
 	  
 }
 
+function moveVerticalAnimate(x,y,k){
+	  var oldNumberCell = $("#number-cell-"+x+"-"+y);
+	  oldNumberCell.animate({
+	  	top:getTop(k),
+	  	left:getLeft(y)
+	  },200)
+	  
+}
 
 //indeed, even only one grid which is movable can return true
 function canMoveLeft(board){
 	for(var x=0;x<4;x++){
 		for(var y = 1;y<4;y++){
-			if(board[x][y-1]==0||board[x][y-1]==board[x][y])
-			return true;
+			if(board[x][y]!=0){
+				if(board[x][y-1]==0||board[x][y-1]==board[x][y])
+			     return true;
+			}
+			
 		}
 	}
 	
@@ -153,7 +164,7 @@ function moveLeft(){
 				for(var k =0;k<y;k++){
 					if( board[x][k]==0 && noHorizontalBlock(x,y,k,board) ){
 						//move
-						moveAnimate(x,y,k);
+						moveHorizontalAnimate(x,y,k);
 						board[x][k]=board[x][y];
 						board[x][y]=0;
 						continue;
@@ -161,7 +172,7 @@ function moveLeft(){
 					
 					if( board[x][k]==board[x][y] && noHorizontalBlock(x,y,k,board) ){
 						//move
-						moveAnimate(x,y,k);
+						moveHorizontalAnimate(x,y,k);
 						board[x][y]=0;
                         
 						//add
@@ -176,6 +187,113 @@ function moveLeft(){
 	 setTimeout("updateBoardView();",200);
 	 return true;
 }
+
+
+function canMoveUp(section , board){
+	if(section=="moveUp"){
+	   for(var x =1; x<4;x++){
+		for(var y =0 ; y<4 ;y++){
+			if(board[x][y]!= 0){
+				if(board[x+1][y]==0||board[x+1][y]==board[x][y])
+				return true;
+			}
+		}
+		}
+	}
+	else{
+		
+	}
+	
+	return false;
+}
+
+function noVerticalBlock(x,y,k,board){
+	if(k!=0){
+		for(var z=k-1;z>k;z--){
+		if (board[z][y]!=0)
+		return false;
+		}
+	}
+	
+	return true;
+}
+
+function moveUp(){
+	section = "moveUp" ;
+	//To confirm whether the gird can be moved towards up
+	if(!canMoveUp(section,board))	
+	   return false;
+	//To move left 
+	
+	for(var x =1; x<4;x++){
+		for(var y =0 ; y<4 ;y++){
+        if(board[x][y]!=0){
+        	
+        	for(var k =0;k<x;k++){
+        		 if(board[k][y]==0 && noVerticalBlock(x,y,k,board)){
+        		 	//move
+        		 	moveVerticalAnimate(x,y,k);
+					board[k][y]=board[x][y];
+					board[x][y]=0;
+					continue;
+        		 }
+        		 
+        		  if(board[k][y]==board[x][y] && noVerticalBlock(x,y,k,board)){
+        		 	//move
+        		 	moveVerticalAnimate(x,y,k);
+        		 	//add
+        		 	board[x][y]=0;
+					board[k][y]*=2;
+					continue;
+        		 }
+        	}
+        }
+        
+	   }
+	}
+	
+	 setTimeout("updateBoardView();",200);
+	 return true;
+}
+
+function moveDown(){
+	section = "moveDown" ;
+	//To confirm whether the gird can be moved towards up
+	if(!canMoveUp(section,board))	
+	   return false;
+	//To move left 
+	
+	for(var x =2; x<=0;x++){
+		for(var y =0 ; y<4 ;y++){
+        if(board[x][y]!=0){
+        	
+        	for(var k =2;k>x;k--){
+        		 if(board[k][y]==0 && noVerticalBlock(section,x,y,k,board)){
+        		 	//move
+        		 	moveVerticalAnimate(x,y,k);
+					board[k][y]=board[x][y];
+					board[x][y]=0;
+					continue;
+        		 }
+        		 
+        		  if(board[k][y]==board[x][y] && noVerticalBlock(x,y,k,board)){
+        		 	//move
+        		 	moveVerticalAnimate(x,y,k);
+        		 	//add
+        		 	board[x][y]=0;
+					board[k][y]*=2;
+					continue;
+        		 }
+        	}
+        }
+        
+	   }
+	}
+	
+	 setTimeout("updateBoardView();",200);
+	 return true;
+}
+
 
 
 

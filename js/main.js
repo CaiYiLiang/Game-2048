@@ -2,6 +2,7 @@ var board = new Array(); //This is for storing 4*4 digits on the board
 var score = 0; //create an vaiable and initial the value as 0
 
 var emptyGridPos = new Array();
+var section = " ";
 var start_x = 0;
 var start_y = 0;
 var end_x = 0;
