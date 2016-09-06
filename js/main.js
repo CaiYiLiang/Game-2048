@@ -39,9 +39,9 @@ function init(){
 	}
 	
 	for(var i=0; i<4;i++){
-		board [i]=new Array();
+		board[i]=new Array();
 		for(var j =0;j<4;j++){
-			board [i][j] = 0;	
+			board[i][j] = 0;	
 		}
 	}
 	
@@ -100,33 +100,189 @@ function girdMove(event){
 	switch(event.keyCode){
 		case 37 : //Key Left
 			if (moveLeft()){
-				generateOneNumber();
-				gameStatus();
+				setTimeout("generateOneNumber();", 250);
+				setTimeout("gameStatus();", 300);	
 			}
 			break;
 			
 	   	case 38 : //Key Up
 			if (moveUp()){
-				generateOneNumber();
-				gameStatus();
+				setTimeout("generateOneNumber();", 250);
+				setTimeout("gameStatus();", 300);	
 			}
 			break;
 			
 		case 39 : //Key right
 			if (moveRight()){
-				generateOneNumber();
-				gameStatus();
+				setTimeout("generateOneNumber();", 250);
+				setTimeout("gameStatus();", 300);	
 			}
 			break;
 		
 		case 40 : //Key Down
 			if (moveDown()){
-				generateOneNumber();
-				gameStatus();
+				setTimeout("generateOneNumber();", 250);
+				setTimeout("gameStatus();", 300);	
 			}
 			break;
 			
 		default:
 		   break;
 	}
+}
+
+function moveLeft() {
+	//To confirm whether the gird can be moved towards left
+	if(!canMoveLeft())
+		return false;
+	//To move left 
+
+	for(var x = 0; x < 4; x++) {
+		for(var y = 1; y < 4; y++) {
+			if(board[x][y] != 0) {
+
+				for(var k = 0; k < y; k++) {
+					if(board[x][k] == 0 && noLeftBlock(x, y, k, board)) {
+						//move
+						moveHorizontalAnimate(x, y, k);
+						board[x][k] = board[x][y];
+						board[x][y] = 0;
+						continue;
+					}
+
+					if(board[x][k] == board[x][y] && noLeftBlock(x, y, k, board)) {
+						//move
+						moveHorizontalAnimate(x, y, k);
+						board[x][y] = 0;
+
+						//add
+						board[x][k] *= 2;
+						continue;
+					}
+				}
+			}
+		}
+	}
+
+	setTimeout("updateBoardView();", 200);
+	return true;
+}
+
+function moveRight(){
+	//console.log("KeyRight");
+	if(!canMoveRight())	
+		return false;
+	
+
+    console.log("noRightBlock ");
+	for(var x =0; x<4;x++){
+		for(var y =2 ; y>=0; y--){
+			if(board[x][y]!=0){
+				
+				for(var k =3;k>y;k--){
+					if( board[x][k]==0 && noRightBlock(x,y,k,board) ){
+						moveHorizontalAnimate(x,y,k);
+						board[x][k]=board[x][y];
+						board[x][y]=0;
+						continue;
+					}
+					
+					if( board[x][k]==board[x][y] && noRightBlock(x,y,k,board)){
+						//move
+						moveHorizontalAnimate(x,y,k);
+						board[x][y]=0;
+                        
+						//add
+						board[x][k]*=2;
+						continue;	
+					}
+				}
+			}
+		}
+	}
+	
+	 setTimeout("updateBoardView();",200);
+	 return true;
+}
+
+function moveUp() {
+	//To confirm whether the gird can be moved towards up
+	if(!canMoveUp())
+		return false;
+	//To move left 
+
+	for(var x = 1; x < 4; x++) {
+		for(var y = 0; y < 4; y++) {
+			if(board[x][y] != 0) {
+
+				for(var k = 0; k < x; k++) {
+					if(board[k][y] == 0 && noUpBlock(x, y, k, board)) {
+						//move
+						moveVerticalAnimate(x, y, k);
+						board[k][y] = board[x][y];
+						board[x][y] = 0;
+						continue;
+					}
+
+					if(board[k][y] == board[x][y] && noUpBlock(x, y, k, board)) {
+						//move
+						moveVerticalAnimate(x, y, k);
+						//add
+						board[x][y] = 0;
+						board[k][y] *= 2;
+						continue;
+					}
+				}
+			}
+
+		}
+	}
+
+	setTimeout("updateBoardView();", 200);
+	return true;
+}
+
+function moveDown() {
+	//console.log("down");
+	//To confirm whether the gird can be moved towards up
+	if(!canMoveDown())
+		return false;
+	//To move down
+	//console.log("To move down");
+	for(var x = 2; x >= 0; x--) {
+		for(var y = 0; y < 4; y++) {
+			if(board[x][y] != 0) {
+
+				for(var k = 3; k > x; k--) {
+					if(board[k][y] == 0 && noDownBlock(x, y, k, board)) {
+						//move
+						moveVerticalAnimate(x, y, k);
+						board[k][y] = board[x][y];
+						board[x][y] = 0;
+						continue;
+					}
+
+					if(board[k][y] == board[x][y] && noDownBlock(x, y, k, board)) {
+						//move
+						moveVerticalAnimate(x, y, k);
+						//add
+						board[x][y] = 0;
+						board[k][y] *= 2;
+						continue;
+					}
+				}
+			}
+
+		}
+	}
+
+	setTimeout("updateBoardView();", 200);
+	return true;
+}
+
+
+
+function gameStatus(board){
+	      if(noMove(board))
+	      alert("Game over!");
 }
