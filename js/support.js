@@ -111,7 +111,7 @@ function showRandomNum(x, y, num) {
 		height: "100px",
 		top: getTop(x),
 		left: getLeft(y)
-	}, 150);
+	}, 300);
 }
 
 function moveHorizontalAnimate(x, y, k) {
@@ -228,11 +228,10 @@ function noDownBlock(x, y, k, board) {
 }
 
 
-function noMove(board){
-	if(canMoveLeft(board)||
-	canMoveRight(board)||
-	canMoveDown(board)||
-	canMoveRight(board))
-	return false;
-	return true;
+function updateScore(score){   
+	      var scoreNum = $("#score_num");
+	      scoreNum.text(score);
+	      scoreNum.animate({height:"0px"});
+	      scoreNum.animate({height:"20px"},50);
+	      
 }

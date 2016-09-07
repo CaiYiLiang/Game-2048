@@ -157,6 +157,10 @@ function moveLeft() {
 
 						//add
 						board[x][k] *= 2;
+						
+						//update score
+						score+=board[x][k];
+						updateScore(score);
 						continue;
 					}
 				}
@@ -194,6 +198,10 @@ function moveRight(){
                         
 						//add
 						board[x][k]*=2;
+						
+						//update score
+						score+=board[x][k];
+						updateScore(score);
 						continue;	
 					}
 				}
@@ -230,6 +238,10 @@ function moveUp() {
 						//add
 						board[x][y] = 0;
 						board[k][y] *= 2;
+						
+						//update score
+						score+=board[k][y];
+						updateScore(score);
 						continue;
 					}
 				}
@@ -268,6 +280,9 @@ function moveDown() {
 						//add
 						board[x][y] = 0;
 						board[k][y] *= 2;
+						//update score
+						score+=board[k][y];
+						updateScore(score);
 						continue;
 					}
 				}
@@ -282,7 +297,11 @@ function moveDown() {
 
 
 
-function gameStatus(board){
-	      if(noMove(board))
+function gameStatus(){
+	      if(canMoveLeft()|| canMoveRight()|| canMoveDown()|| canMoveUp())
+	         return true;
+	      else
 	      alert("Game over!");
 }
+
+
