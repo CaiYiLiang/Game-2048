@@ -2,6 +2,7 @@ var board = new Array(); //This is for storing 4*4 digits on the board
 var score = 0; //create an vaiable and initial the value as 0
 
 var emptyGridPos = new Array();
+var girdAdd = new Array();
 var action = 0;
 var start_x = 0;
 var start_y = 0;
@@ -40,8 +41,10 @@ function init(){
 	
 	for(var i=0; i<4;i++){
 		board[i]=new Array();
+		girdAdd[i]=new Array();
 		for(var j =0;j<4;j++){
 			board[i][j] = 0;	
+			girdAdd[i][j]="false";
 		}
 	}
 	
@@ -58,12 +61,14 @@ function updateBoardView(){
         for( var j = 0 ; j < 4 ; j ++ ){
             $("#grid-container").append( '<div class="number-cell" id="number-cell-'+i+'-'+j+'"></div>' );
             var numberCell = $("#number-cell-"+i+"-"+j);
-
+            
+            girdAdd[i][j]="false";
+            
             if( board[i][j] == 0 ){
                 numberCell.css("width","0px");
                 numberCell.css("height","0px");
-                numberCell.css("top",getTop(i,j) + 50);
-                numberCell.css("left",getLeft(i,j) + 50);
+                numberCell.css("top",getTop(i) + 50);
+                numberCell.css("left",getLeft(j) + 50);
             }
             else{
                 numberCell.css("width","100px");
@@ -101,28 +106,28 @@ function girdMove(event){
 	switch(event.keyCode){
 		case 37 : //Key Left
 			if (moveLeft()){
-				setTimeout("generateOneNumber();", 250);
+				setTimeout("generateOneNumber();", 210);
 				setTimeout("gameStatus();", 300);	
 			}
 			break;
 			
 	   	case 38 : //Key Up
 			if (moveUp()){
-				setTimeout("generateOneNumber();", 250);
+				setTimeout("generateOneNumber();", 210);
 				setTimeout("gameStatus();", 300);	
 			}
 			break;
 			
 		case 39 : //Key right
 			if (moveRight()){
-				setTimeout("generateOneNumber();", 250);
+				setTimeout("generateOneNumber();", 210);
 				setTimeout("gameStatus();", 300);	
 			}
 			break;
 		
 		case 40 : //Key Down
 			if (moveDown()){
-				setTimeout("generateOneNumber();", 250);
+				setTimeout("generateOneNumber();", 210);
 				setTimeout("gameStatus();", 300);	
 			}
 			break;
@@ -150,13 +155,14 @@ function moveLeft() {
 						continue;
 					}
 
-					if(board[x][k] == board[x][y] && noLeftBlock(x, y, k, board)) {
+					if(board[x][k] == board[x][y] && noLeftBlock(x, y, k, board) && girdAdd[x][k]=="false") {
 						//move
 						moveHorizontalAnimate(x, y, k);
 						board[x][y] = 0;
 
 						//add
 						board[x][k] *= 2;
+						girdAdd[x][k]="true";
 						
 						//update score
 						score+=board[x][k];
@@ -191,13 +197,14 @@ function moveRight(){
 						continue;
 					}
 					
-					if( board[x][k]==board[x][y] && noRightBlock(x,y,k,board)){
+					if( board[x][k]==board[x][y] && noRightBlock(x,y,k,board) && girdAdd[x][k]=="false" ){
 						//move
 						moveHorizontalAnimate(x,y,k);
 						board[x][y]=0;
                         
 						//add
 						board[x][k]*=2;
+						girdAdd[x][k]="true";
 						
 						//update score
 						score+=board[x][k];
@@ -232,12 +239,13 @@ function moveUp() {
 						continue;
 					}
 
-					if(board[k][y] == board[x][y] && noUpBlock(x, y, k, board)) {
+					if(board[k][y] == board[x][y] && noUpBlock(x, y, k, board) && girdAdd[k][y]=="false" ) {
 						//move
 						moveVerticalAnimate(x, y, k);
 						//add
 						board[x][y] = 0;
 						board[k][y] *= 2;
+						girdAdd[k][y]="true"
 						
 						//update score
 						score+=board[k][y];
@@ -274,12 +282,14 @@ function moveDown() {
 						continue;
 					}
 
-					if(board[k][y] == board[x][y] && noDownBlock(x, y, k, board)) {
+					if(board[k][y] == board[x][y] && noDownBlock(x, y, k, board) && girdAdd[k][y]=="false"  ) {
 						//move
 						moveVerticalAnimate(x, y, k);
 						//add
 						board[x][y] = 0;
 						board[k][y] *= 2;
+						girdAdd[k][y] = "true";
+						
 						//update score
 						score+=board[k][y];
 						updateScore(score);
