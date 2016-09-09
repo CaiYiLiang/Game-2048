@@ -65,7 +65,7 @@ function noSpace(board) {
 	for(var i = 0; i < 4; i++) {
 		for(var j = 0; j < 4; j++) {
 			if(board[i][j] == 0)
-				console.log("noSpace=false");
+				//console.log("noSpace=false");
 				return false; //there is an empty grid
 		}
 	}
@@ -149,7 +149,7 @@ function canMoveLeft() {
 
 
 function canMoveRight() {
-    console.log("canMoveRight??");
+//  console.log("canMoveRight??");
 	for(var x = 0; x < 4; x++) {
 		for(var y = 0; y < 3; y++) {
 			if(board[x][y] != 0) {
@@ -161,7 +161,7 @@ function canMoveRight() {
 		}
 	}
 	
-    console.log("canMoveRightfalse");
+//  console.log("canMoveRightfalse");
 	return false;
 }
 
@@ -193,7 +193,7 @@ function canMoveDown() {
 
 function noLeftBlock(x, y, k, board) {
 	for(var z = k + 1; z < y; z++) {
-		if(board[x][k] != 0)
+		if(board[x][z] != 0)
 			return false;
 	}
 	return true;
@@ -230,8 +230,21 @@ function noDownBlock(x, y, k, board) {
 
 function updateScore(score){   
 	      var scoreNum = $("#score_num");
-	      scoreNum.text(score);
-	      scoreNum.animate({height:"0px"});
-	      scoreNum.animate({height:"20px"},50);
-	      
+	      scoreNum.fadeOut(200,function(){
+	      	scoreNum.text(score);
+	      	scoreNum.fadeIn(300);
+	      });
+  
+}
+
+
+function noMove(){
+	   console.log("NO MOVE");
+       if(canMoveLeft()||
+	canMoveRight()||
+	canMoveDown()||
+	canMoveRight())
+	return false;
+	return true;
+	   		
 }

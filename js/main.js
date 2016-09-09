@@ -137,7 +137,6 @@ function moveLeft() {
 	if(!canMoveLeft())
 		return false;
 	//To move left 
-
 	for(var x = 0; x < 4; x++) {
 		for(var y = 1; y < 4; y++) {
 			if(board[x][y] != 0) {
@@ -179,7 +178,7 @@ function moveRight(){
 		return false;
 	
 
-    console.log("noRightBlock ");
+    //console.log("noRightBlock ");
 	for(var x =0; x<4;x++){
 		for(var y =2 ; y>=0; y--){
 			if(board[x][y]!=0){
@@ -299,10 +298,13 @@ function moveDown() {
 
 
 function gameStatus(){
-	      if(canMoveLeft()|| canMoveRight()|| canMoveDown()|| canMoveUp())
-	         return true;
-	      else
-	      alert("Game over!");
+	     console.log("gameStatus");
+	      if(noSpace(board) && noMove()){
+	      	 console.log("oVER");
+	      	  alert("Game over!");
+	      }
+	     
+
 }
 
 
