@@ -230,10 +230,15 @@ function noDownBlock(x, y, k, board) {
 
 function updateScore(score){   
 	      var scoreNum = $("#score_num");
-	      scoreNum.fadeOut(200,function(){
+	      scoreNum.animate({height:"0px"},200,function(){
 	      	scoreNum.text(score);
-	      	scoreNum.fadeIn(300);
+	      	scoreNum.animate({height:"20px"},200)
 	      });
+	     
+//	        scoreNum.fadeOut(200,function(){
+//	      	scoreNum.text(score);
+//	      	scoreNum.fadeIn(300);
+//	      });
   
 }
 
