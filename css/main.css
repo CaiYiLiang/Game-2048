@@ -1,46 +1,70 @@
-
-header {
-	margin: 0 auto;
-	text-align:center;	
+body{
+	background: #faf8ef;
 }
 
-header h1 {	
-	font-size: 40px;
+.container{
+	width: 500px;
+	margin: 0 auto;
+	/*border: 1px solid blue;*/
+}
+
+
+#header-content {
+	margin: 0 auto;
+	overflow:hidden;  /*to resolve the float issue*/
+	
+	/*border: 1px solid red;   */
+}
+
+header #title {
+	display: inline-block;	
+	float: left;
+	
+	font-weight: bold;
+	font-size: 50px;
+	color: #776E65;
+	
+}
+
+#game{
+	display: inline-block;
+	float: right;
+	
+    background: #e6ceb7;
+    margin:30px;
+    text-align: center;
+    border-radius: 5px;
+	/*border:1px solid red;*/
 }
 
 header #new_game,header #score {
-	 display: inline-block;
-	 margin: 0 15px 15px 15px;
+	 display: block;
+	 color:#fff;
+	 padding:5px;
 	 
 }
 
 header #new_game {
-	 border: 1px solid #8f7a66;
-	 background-color: #8f7a66;
-	 border-radius: 10px;
+	 background-color: #d4bca6;
+	 border-top-left-radius: 5px;
+	 border-top-right-radius: 5px;
 	 
 	 font-family:Arial;
-	 font-size: 15px;
-     color:#fff;
-     padding: 5px;
+	 font-size: 17px;
+     text-align: center;
      text-decoration: none;
 }
 
 header #new_game:hover{
-	background-color:#9f8b77;
+	background-color:#e8d6c4;
 }
 
 header #score{
 	font-size: 20px;
+	
 }
 
-header #author {
-	font-size: 13px;
-}
 
-header #author a{
-	text-decoration: none;
-}
 
 
 #grid-container{

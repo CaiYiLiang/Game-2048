@@ -232,7 +232,7 @@ function updateScore(score){
 	      var scoreNum = $("#score_num");
 	      scoreNum.animate({height:"0px"},200,function(){
 	      	scoreNum.text(score);
-	      	scoreNum.animate({height:"20px"},200)
+	      	scoreNum.animate({height:"15px"},200)
 	      });
 	     
 //	        scoreNum.fadeOut(200,function(){

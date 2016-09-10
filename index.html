@@ -12,10 +12,17 @@
 	<body>
 		<!--The header info-->
 		<header>
-			<h1>2048</h1>
-			<a href="#" id="new_game">New Game</a>
-			<span id="score">score: <span id="score_num">0</span></span>
-			<!-- <div id="author"> Author: <a href="#">Cherry Liang</a></div> -->
+			<div class="container">
+				<div id="header-content">
+				<h1 id="title">2048</h1>
+				<div id="game">
+				<a href="#" id="new_game">New Game</a>
+				<span id="score">score: <span id="score_num">0</span></span>
+				</div>
+				
+				<!--<div id="author"> Author: <a href="#">Cherry Liang</a></div>-->
+			</div>
+			
 		</header>
 
 		<!-- 4*4 grids -->
@@ -39,6 +46,7 @@
 			<div class="grid-cell" id="grid-cell-3-1"></div>
 			<div class="grid-cell" id="grid-cell-3-2"></div>
 			<div class="grid-cell" id="grid-cell-3-3"></div>
+		</div>
 		</div>
 		
 		<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
